@@ -1,0 +1,51 @@
+import numpy as np
+import cv2
+import os
+import random
+import matplotlib.pyplot as plt
+from keras.preprocessing.image import ImageDataGenerator
+import keras,os
+from keras.models import Sequential
+from keras.layers import Dense, Conv2D, MaxPool2D , Flatten
+from keras.preprocessing.image import ImageDataGenerator
+import numpy as np
+from tensorflow.keras.optimizers import Adam
+from keras import losses
+
+trdata = ImageDataGenerator()
+testdata= ImageDataGenerator()
+train_data=trdata.flow_from_directory(directory="/kaggle/input/intel-image-classification/seg_train/seg_train",target_size=(224,224))
+test_data=testdata.flow_from_directory(directory="/kaggle/input/intel-image-classification/seg_test/seg_test",target_size=(224,224))
+
+model = Sequential()
+model.add(Conv2D(input_shape=(224,224,3),filters=64,kernel_size=(3,3),padding="same", activation="relu"))
+model.add(Conv2D(filters=64,kernel_size=(3,3),padding="same", activation="relu"))
+model.add(MaxPool2D(pool_size=(2,2),strides=(2,2)))
+model.add(Conv2D(filters=128, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(Conv2D(filters=128, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(MaxPool2D(pool_size=(2,2),strides=(2,2)))
+model.add(Conv2D(filters=256, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(Conv2D(filters=256, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(Conv2D(filters=256, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(MaxPool2D(pool_size=(2,2),strides=(2,2)))
+model.add(Conv2D(filters=512, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(Conv2D(filters=512, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(Conv2D(filters=512, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(MaxPool2D(pool_size=(2,2),strides=(2,2)))
+model.add(Conv2D(filters=512, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(Conv2D(filters=512, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(Conv2D(filters=512, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(MaxPool2D(pool_size=(2,2),strides=(2,2)))
+model.add(Flatten())
+model.add(Dense(units=4096,activation="relu"))
+model.add(Dense(units=2048,activation="relu"))
+model.add(Dense(units=512,activation="relu"))
+model.add(Dense(units=64,activation="relu"))
+model.add(Dense(units=8,activation="relu"))
+
+model.add(Dense(units=6, activation="softmax"))
+
+opt = Adam(lr=0.001)
+model.compile(optimizer=opt, loss=losses.categorical_crossentropy, metrics=['accuracy'])
+
+hist = model.fit_generator(steps_per_epoch=32, generator=train_data, validation_data= test_data, validation_steps=8,epochs=100)
