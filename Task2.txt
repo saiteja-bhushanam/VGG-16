@@ -1,0 +1,32 @@
+ 
+TASK 2
+ 
+Aim: To create Image Classification model using TF / Keras.
+ 
+Details on the Task:
+1.	Create a Custom Neural Network architecture for Image classification for multi-class classification
+		a.	Leverage VGG-16, AlexNet, Unet (if possible) as your skeleton architecture.
+		b.	Leverage the pre-trained weights to achieve the training results faster.
+		c.	Create a custom model for without leveraging pre-trained models.
+2.	Create a custom Data loader / Generator
+		a.	Try training the model by using Keras’s data loader.
+		b.	Create your custom Data loader and train the model.
+3.	Save the output weights in a file.
+4.	Write and inferencing script
+		a.	To accept single image as input and infer
+		b.	To accept batch of images and infer
+ 
+Reference Material:
+•	Base understanding of Image Classification - https://keras.io/examples/vision/image_classification_from_scratch/#build-a-model
+•	Using TF - https://www.tensorflow.org/tutorials/images/classification#create_the_model
+•	Using Transfer Learning - https://www.tensorflow.org/tutorials/images/transfer_learning#create_the_base_model_from_the_pre-trained_convnets
+•	Custom Data Generator - https://chroniclesofai.com/custom-vision-chapter-3-image-classification-tensorflow/
+•	Dataset to be used - https://www.kaggle.com/datasets/puneet6060/intel-image-classification
+ 
+Timeline: 3 days (by EOD Monday 5th December 2022)
+ 
+Please try and get started on this task as soon as possible and hopefully complete it by the expected deadline.
+Please feel free to reach out for any queries.
+ 
+Thanks and Regards,
+Vaibhav Satpathy
